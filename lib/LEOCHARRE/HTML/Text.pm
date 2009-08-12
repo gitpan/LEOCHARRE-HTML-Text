@@ -6,7 +6,7 @@ use vars qw($VERSION @EXPORT_OK %EXPORT_TAGS @ISA);
 @ISA = qw/Exporter/;
 @EXPORT_OK = qw/html2txt/;
 use LEOCHARRE::DEBUG;
-$VERSION = sprintf "%d.%02d", q$Revision: 1.3 $ =~ /(\d+)/g;
+$VERSION = sprintf "%d.%02d", q$Revision: 1.4 $ =~ /(\d+)/g;
 
 
 
@@ -126,39 +126,68 @@ __END__
 
 LEOCHARRE::HTML::Text - turn html to text
 
+=head1 SYNOPSIS
+
+  use LEOCHARRE::HTML::Text qw/html2txt/;
+
+  my $o = html2txt($url);
+  my $o = html2txt($path);
+  my $o = html2txt($html);
+
 =head1 DESCRIPTION
 
 This converts html code into text.
 
 =head2 Namespace
 
-It resides under my namespace because I am not so presumptuous as to think I am the most 
-qualified person to write this.
-But I am qualified.
-So here.
+It resides under my namespace because I am not so presumptuous as to think I am the most qualified person to write this.
+But I am qualified. So here.
 
 =head1 SUBROUTINES
 
 Not exported by default
-
-
 
 =head2 html2txt()
 
 Argument is url, html code, or path to file on disk.
 Returns text.
 
-=head1 OO API
+=head1 CAVEATS
 
-=head2 SYNOPSIS
+In development. 
 
-   use LEOCHARRE::HTML::Text;
+=head1 BUGS
 
-   my $o = LEOCHARRE::HTML::Text->new($url);
-   my $o = LEOCHARRE::HTML::Text->new($path);
-   my $o = LEOCHARRE::HTML::Text->new($html);
+Please notify the AUTHOR.
 
-   my $html_original    = $o->html_original;
-   my $html_cleaned     = $o->html_cleaned;
-   my $html_source_type = $o->html_source_type;
+=head1 SEE ALSO
+
+L<HTML::Entities>.
+L<bin/html2txt> cli to this module, included.
+
+=head1 AUTHOR
+
+Leo Charre leocharre at cpan dot org
+
+=head1 THANKS
+
+Gordon Van Amburg
+
+=head1 COPYRIGHT
+
+Copyright (c) 2009 Leo Charre. All rights reserved.
+
+=head1 LICENSE
+
+This package is free software; you can redistribute it and/or modify it under the same terms as Perl itself, i.e., under the terms of the "Artistic License" or the "GNU General Public License".
+
+=head1 DISCLAIMER
+
+This package is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+
+See the "GNU General Public License" for more details.
+
+=cut
+
+
 

@@ -1,5 +1,7 @@
+Changes
 MANIFEST
 Makefile.PL
+README
 bin/html2txt
 lib/LEOCHARRE/HTML/Rip.pm
 lib/LEOCHARRE/HTML/Text.pm

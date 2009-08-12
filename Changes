@@ -1,0 +1,14 @@
+2009-08-12 17:04  cvs
+
+	* bin/html2txt, lib/LEOCHARRE/HTML/Text.pm: The documentation was
+	  not showing proper example usage, thanks to Gordon Van Amburg.
+
+2008-11-21 11:03  cvs
+
+	* bin/html2txt: added some help to cli
+
+2008-11-14 13:38  cvs
+
+	* bin/.html2txt.swp, bin/html2txt, lib/LEOCHARRE/HTML/Text.pm:
+	  Initial revision
+

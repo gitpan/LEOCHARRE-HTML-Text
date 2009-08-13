@@ -1,9 +1,9 @@
 --- #YAML:1.0
 name:               LEOCHARRE-HTML-Text
-version:            1.04
+version:            1.05
 abstract:           ~
 author:  []
-license:            unknown
+license:            perl
 distribution_type:  module
 configure_requires:
     ExtUtils::MakeMaker:  0
@@ -11,12 +11,15 @@ build_requires:
     ExtUtils::MakeMaker:  0
 requires:
     Carp:              1
+    Config::Auto:      0.20
     Exporter:          5
     File::Which:       0.05
-    HTML::Entities:    1.29
+    FindBin:           1.47
+    HTML::Entities:    1.35
     LEOCHARRE::CLI:    1.19
-    LEOCHARRE::DEBUG:  1.12
+    LEOCHARRE::DEBUG:  1.13
     Smart::Comments:   1
+    Test::More:        0.8
     Test::Simple:      0
 no_index:
     directory:

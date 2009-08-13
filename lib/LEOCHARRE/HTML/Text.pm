@@ -2,12 +2,15 @@ package LEOCHARRE::HTML::Text;
 use Carp;
 use strict;
 use Exporter;
+use LEOCHARRE::DEBUG;
 use vars qw($VERSION @EXPORT_OK %EXPORT_TAGS @ISA);
 @ISA = qw/Exporter/;
-@EXPORT_OK = qw/html2txt/;
-use LEOCHARRE::DEBUG;
-$VERSION = sprintf "%d.%02d", q$Revision: 1.4 $ =~ /(\d+)/g;
+@EXPORT_OK = qw/html2txt slurp_url/;
+%EXPORT_TAGS = ( all => \@EXPORT_OK );
+$VERSION = sprintf "%d.%02d", q$Revision: 1.5 $ =~ /(\d+)/g;
 
+*_slurp_url = \&_slurp_url_safe_w32;
+*slurp_url = \&_slurp_url_safe_w32;
 
 
 
@@ -50,7 +53,7 @@ sub _source_type {
    return;
 }
 
-sub _slurp_url {
+sub _slurp_url_linux {
    my $arg = shift;
    require File::Which;
    my $bin = File::Which::which('wget') or die("Missing 'wget' from system.\n");
@@ -60,6 +63,22 @@ sub _slurp_url {
    $out or carp("It seems '$arg' produces no output.\n") and return;
    return $out;
 }
+
+
+# THIS IS A MODIFICATION THAT WORKS ON BOTH WIN32 AND LINUX (ONE CHANGE ONLY)
+# contributed by Gordon Van Amburg
+sub _slurp_url_safe_w32{
+   my $arg = shift;
+   require File::Which;   
+   my $bin = File::Which::which('wget') or die("Missing 'wget' from system.\n");
+    
+    #REMOVING SINGLE QUOTES AROUND $arg STOPS FAILURE IN WINDOWS VISTA USING GNUWIN32 wget.
+   my $out = `$bin -q -O - $arg`;
+   $? and carp("Something went wrong with wget, $?\n") and return;
+   $out or carp("It seems '$arg' produces no output.\n") and return;
+   return $out;
+}
+
 
 sub _slurp_file {
    my $arg = shift;
@@ -128,11 +147,13 @@ LEOCHARRE::HTML::Text - turn html to text
 
 =head1 SYNOPSIS
 
-  use LEOCHARRE::HTML::Text qw/html2txt/;
+  use LEOCHARRE::HTML::Text qw/html2txt slurp_url/;
 
-  my $o = html2txt($url);
-  my $o = html2txt($path);
-  my $o = html2txt($html);
+  my $out = html2txt($url);
+  my $out = html2txt($path);
+  my $out = html2txt($html);
+
+  my $raw_html = slurp_url('http://news.bbc.co.uk');
 
 =head1 DESCRIPTION
 
@@ -151,6 +172,12 @@ Not exported by default
 
 Argument is url, html code, or path to file on disk.
 Returns text.
+This is what you want to use.
+
+=head2 slurp_url()
+
+Argument is url. 
+Returns raw html as per wget.
 
 =head1 CAVEATS
 
@@ -163,7 +190,7 @@ Please notify the AUTHOR.
 =head1 SEE ALSO
 
 L<HTML::Entities>.
-L<bin/html2txt> cli to this module, included.
+L<html2txt> cli to this module, included.
 
 =head1 AUTHOR
 
